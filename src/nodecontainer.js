@@ -37,7 +37,18 @@ NodeContainer.prototype.cloneTo = function(stack) {
 };
 
 NodeContainer.prototype.getOpacity = function() {
-    return this.opacity === null ? (this.opacity = this.cssFloat('opacity')) : this.opacity;
+    if( this.opacity !== null ) {
+        return this.opacity;
+    }
+
+    var opacity = this.cssFloat('opacity');
+    var parent = this.parent;
+    while( parent ) {
+        opacity = opacity * parent.getOpacity();
+        parent = parent.parent;
+    }
+    this.opacity = opacity;
+    return opacity;
 };
 
 NodeContainer.prototype.assignStack = function(stack) {
