@@ -63,7 +63,10 @@ module.exports = function(grunt) {
                 dest: 'dist/<%= pkg.name %>.js',
                 options: {
                     browserifyOptions: {
-                        standalone: 'html2canvas'
+                        standalone: 'html2canvas',
+                        plugin: [
+                            [ "browserify-derequire" ]
+                        ]
                     },
                     banner: meta.banner
                 }
@@ -75,7 +78,10 @@ module.exports = function(grunt) {
                 dest: 'dist/<%= pkg.name %>.svg.js',
                 options:{
                     browserifyOptions: {
-                        standalone: 'html2canvas.svg'
+                        standalone: 'html2canvas.svg',
+                        plugin: [
+                            [ "browserify-derequire" ]
+                        ]
                     },
                     banner: meta.banner
                 }
